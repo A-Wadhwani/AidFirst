@@ -108,9 +108,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 100,
                 width: 375,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Colors.redAccent,
                   borderRadius: BorderRadius.circular(12),
                 ),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
+                  child: Text(
+                    "Get Help!",
+                    style:  TextStyle(
+                      color: Colors.white,
+                      fontSize: 50,
+                      fontWeight: FontWeight.w400
+                    ),
+                  ),
+                )
               ),
             ),
             CupertinoButton(
@@ -118,17 +129,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 100,
                 width: 375,
                 decoration: BoxDecoration(
-                  color: Colors.redAccent,
+                  color: Colors.green,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Container(
                   margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
                   child: Text(
-                    "Get Help?",
+                    "Learn about First Aid Techniques",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 50,
-                        fontWeight: FontWeight.w600),
+                        fontSize: 30,
+                        fontWeight: FontWeight.w400),
                   ),
                 ),
               ),

@@ -2,6 +2,7 @@ import 'package:boilermake/image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,12 +59,15 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      //  appBar: AppBar(
-      // Here we take the value from the MyHomePage object that was created by
-      // the App.build method, and use it to set our appbar title.
-      //title: Text(widget.title),
-      //  ),
-      body: Center(
+      appBar: AppBar(
+        /*Here we take the value from the MyHomePage object that was created by the
+         App.build method, and use it to set our appbar title.*/
+        title: Text(
+          widget.title,
+        ),
+      ),
+      body: Align(
+        alignment: Alignment.topCenter,
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
@@ -81,46 +85,60 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Welcome to AidFirst',
-            ),
-            CupertinoButton(
-              child: Container(
-                height: 100,
-                width: 375,
-                decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Container(
 
-                  margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
-                  child: Text(
-                    "Get Help!",
-                    style:  GoogleFonts.bangers(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 60,
-                    ),
-                  ),
-                )
+
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: Text(
+                'Welcome to AidFirst',
+                style: GoogleFonts.bebasNeue(
+                  fontSize: 45,
+                ),
               ),
+            ),
+
+            CupertinoButton(
+              padding: EdgeInsets.all(4.0),
+              child: Container(
+                  height: 200,
+                  width: 375,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Get Help!",
+                        style: GoogleFonts.bangers(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 60,
+                        ),
+                      ),
+                    ),
+
+                  )),
               onPressed: () async {
                 final firstcamera = await getCamera();
                 Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) => TakePictureScreen(
-                        camera: firstcamera,
-                      ),
+                      builder: (context) =>
+                          TakePictureScreen(
+                            camera: firstcamera,
+                          ),
                     ));
               },
             ),
             CupertinoButton(
+              padding: EdgeInsets.all(4.0),
               child: Container(
-                height: 100,
+                height: 150,
                 width: 375,
                 decoration: BoxDecoration(
                   color: Colors.green,
@@ -129,31 +147,50 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Container(
                   margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
                   child: Text(
-                    "Learn about First Aid Techniques",
-                    style: TextStyle(
+                    "Perform \nFirst Aid",
+                    style: GoogleFonts.bangers(
                         color: Colors.white,
-                        fontSize: 30,
+                        height: 1.0,
+                        fontSize: 60,
                         fontWeight: FontWeight.w400),
                   ),
                 ),
               ),
-
+              onPressed: () async {
+                /*Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) =>
+                          TakePictureScreen(
+                            camera: firstcamera,
+                          ),
+                    )); */
+              },
             ),
             CupertinoButton(
+              padding: EdgeInsets.all(4.0),
               child: Container(
-                height: 100,
+                height: 150,
                 width: 375,
                 decoration: BoxDecoration(
-                  color: Colors.yellow,
+                  color: Colors.black,
                   borderRadius: BorderRadius.circular(12),
                 ),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
+                  child: Text(
+                    "Call 911",
+                    style: GoogleFonts.bangers(
+                        color: Colors.white,
+                        fontSize: 60,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),
               ),
+              onPressed: () {
+                launch("tel://911");
+              },
             ),
-
-            /*   Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display2,
-            ), */
           ],
         ),
       ),

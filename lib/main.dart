@@ -156,16 +156,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              onPressed: () async {
-                /*Navigator.push(
+              onPressed: () {
+                Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) =>
-                          TakePictureScreen(
-                            camera: firstcamera,
-                          ),
-                    )); */
+                      builder: (context) => FirstAidList(),
+                    ));
               },
+
             ),
             CupertinoButton(
               padding: EdgeInsets.all(4.0),
@@ -191,6 +189,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 launch("tel://911");
               },
             ),
+
+            /*   Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.display2,
+            ), */
           ],
         ),
       ),

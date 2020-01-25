@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 
@@ -245,4 +247,57 @@ class TestScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class FirstAidList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Select the Injury',
+      home: Scaffold(
+        appBar: AppBar(title: Text('Selecy the Injury')),
+        body: ListBodyLayout(),
+      ),
+    );
+    }
+  }
+class ListBodyLayout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context)
+  {
+    return _injuryListView(context);
+  }
+}
+Widget _injuryListView(BuildContext context)
+{
+  final injuries = ['Ant Bite', 'Bee Sting', 'Wasp Bite', 'First Degree Burn',
+    'Second Degree Burn', 'Third Degree Burn', 'Mild Cut/Scrape', 'Deep Cut', 'Bruise'];
+  return ListView.builder(
+    itemCount: injuries.length,
+    itemBuilder: (context, index) {
+      return CupertinoButton(
+          child: Container(
+            height: 50,
+            width: 375,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+              image: DecorationImage(
+                image: AssetImage("assets/ant.jpg"),
+                fit: BoxFit.cover,
+              )
+            ),
+            child: Container(
+                child: Text(
+                  injuries[index],
+                  style: GoogleFonts.roboto(
+                      fontSize: 30,
+                    color: Colors.black
+                  ),
+                )
+            ),
+          )
+      );
+    }
+  );
 }

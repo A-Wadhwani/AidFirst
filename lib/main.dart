@@ -137,6 +137,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => FirstAidList(),
+                    ));
+              },
 
             ),
             CupertinoButton(

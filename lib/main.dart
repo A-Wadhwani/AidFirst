@@ -123,6 +123,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 )
               ),
+              onPressed: () async {
+                final firstcamera = await getCamera();
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => TakePictureScreen(
+                        camera: firstcamera,
+                      ),
+                    ));
+              },
             ),
             CupertinoButton(
               child: Container(

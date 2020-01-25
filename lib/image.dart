@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 
+
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
@@ -171,7 +172,7 @@ class DisplayPictureScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Here is the picture you took',
+              'Picture',
             ),
             Image.file(File(imagePath)),
 
@@ -183,7 +184,7 @@ class DisplayPictureScreen extends StatelessWidget {
                     MaterialPageRoute(
                     builder: (context) => TestScreen(imagePath: "test")));
               },
-              child: Text("Press Me"),
+              child: Text("Click here for first aid advice"),
               color: Colors.lightBlue,
             ),
           ],
@@ -201,7 +202,7 @@ class TestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Display the Picture')),
+      appBar: AppBar(title: Text('Results')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
       body: Center(
@@ -225,7 +226,19 @@ class TestScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'This is the test screen',
+              'This is where the first aid instructions will be printed',
+            ),
+            RaisedButton(
+              onPressed: () async {
+                final firstcamera = await getCamera();
+                print("Re-routed back to picture screen");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TakePictureScreen(camera: firstcamera)));
+              },
+              child: Text("Click here to retake picture"),
+              color: Colors.lightBlue,
             ),
           ],
         ),

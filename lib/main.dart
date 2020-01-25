@@ -48,7 +48,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -58,11 +57,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-    //  appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        //title: Text(widget.title),
-    //  ),
+      //  appBar: AppBar(
+      // Here we take the value from the MyHomePage object that was created by
+      // the App.build method, and use it to set our appbar title.
+      //title: Text(widget.title),
+      //  ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -87,25 +86,75 @@ class _MyHomePageState extends State<MyHomePage> {
               'Welcome to AidFirst',
               style: Theme.of(context).textTheme.display1,
             ),
-            Padding(
-                padding: EdgeInsets.all(10.0)
-            ),
-            FlatButton(
-              onPressed: () async{
+            Padding(padding: EdgeInsets.all(10.0)),
+            RaisedButton(
+              onPressed: () async {
                 final firstcamera = await getCamera();
-                Navigator.push(context, CupertinoPageRoute(builder: (context) => TakePictureScreen(
-                    camera: firstcamera,
-                ),
-                ));
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => TakePictureScreen(
+                        camera: firstcamera,
+                      ),
+                    ));
               },
-              color: Colors.blue,
-              textColor: Colors.white,
               child: Text(
                 'Begin',
                 style: TextStyle(fontSize: 20.0),
               ),
             ),
-         /*   Text(
+            CupertinoButton(
+              child: Container(
+                height: 100,
+                width: 375,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+            CupertinoButton(
+              child: Container(
+                height: 100,
+                width: 375,
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
+                  child: Text(
+                    "Get Help?",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              onPressed: () async {
+                final firstcamera = await getCamera();
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => TakePictureScreen(
+                        camera: firstcamera,
+                      ),
+                    ));
+              },
+            ),
+            CupertinoButton(
+              child: Container(
+                height: 100,
+                width: 375,
+                decoration: BoxDecoration(
+                  color: Colors.yellow,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+
+            /*   Text(
               '$_counter',
               style: Theme.of(context).textTheme.display2,
             ), */

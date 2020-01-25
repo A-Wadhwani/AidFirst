@@ -86,23 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
               'Welcome to AidFirst',
               style: Theme.of(context).textTheme.display1,
             ),
-            Padding(padding: EdgeInsets.all(10.0)),
-            RaisedButton(
-              onPressed: () async {
-                final firstcamera = await getCamera();
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => TakePictureScreen(
-                        camera: firstcamera,
-                      ),
-                    ));
-              },
-              child: Text(
-                'Begin',
-                style: TextStyle(fontSize: 20.0),
-              ),
-            ),
             CupertinoButton(
               child: Container(
                 height: 100,

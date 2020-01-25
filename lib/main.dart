@@ -1,6 +1,7 @@
 import 'package:boilermake/image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -84,7 +85,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'Welcome to AidFirst',
-              style: Theme.of(context).textTheme.display1,
             ),
             CupertinoButton(
               child: Container(
@@ -95,17 +95,28 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Container(
+
                   margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
                   child: Text(
                     "Get Help!",
-                    style:  TextStyle(
+                    style:  GoogleFonts.bangers(
                       color: Colors.white,
-                      fontSize: 50,
-                      fontWeight: FontWeight.w400
+                      fontWeight: FontWeight.w500,
+                      fontSize: 60,
                     ),
                   ),
                 )
               ),
+              onPressed: () async {
+                final firstcamera = await getCamera();
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => TakePictureScreen(
+                        camera: firstcamera,
+                      ),
+                    ));
+              },
             ),
             CupertinoButton(
               child: Container(
@@ -126,16 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              onPressed: () async {
-                final firstcamera = await getCamera();
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => TakePictureScreen(
-                        camera: firstcamera,
-                      ),
-                    ));
-              },
+
             ),
             CupertinoButton(
               child: Container(

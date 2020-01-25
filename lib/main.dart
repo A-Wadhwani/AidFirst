@@ -1,18 +1,8 @@
 import 'package:boilermake/image.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'dart:io';
 
-var firstCamera;
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // Obtain a list of the available cameras on the device.
-  final cameras = await availableCameras();
-  // Get a specific camera from the list of available cameras.
-  firstCamera = cameras.first;
+void main() {
   runApp(MyApp());
 }
 
@@ -58,7 +48,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -101,10 +90,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
                 padding: EdgeInsets.all(10.0)
             ),
-            RaisedButton(
-              onPressed: (){
-                Navigator.push(context, CupertinoPageRoute(builder: (context)=> TakePictureScreen(camera: firstCamera,)));
-                debugPrint("Hello");
+            FlatButton(
+              onPressed: () async{
+                final firstcamera = await getCamera();
+                Navigator.push(context, CupertinoPageRoute(builder: (context) => TakePictureScreen(
+                    camera: firstcamera,
+                ),
+                ));
               },
               color: Colors.blue,
               textColor: Colors.white,

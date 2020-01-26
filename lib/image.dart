@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:boilermake/main.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_livestream_ml_vision/firebase_livestream_ml_vision.dart';
@@ -38,7 +39,6 @@ Future<void> main() async {
   );
 }
 
-
 Future<CameraDescription> getCamera() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -50,6 +50,7 @@ Future<CameraDescription> getCamera() async {
 
   return firstCamera;
 }
+
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
@@ -155,6 +156,7 @@ class DisplayPictureScreen extends StatelessWidget {
   const DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
 
   @override
+
   Future<String> getFileData(String path) async {
     return await rootBundle.loadString(path);
   }
@@ -189,7 +191,12 @@ class DisplayPictureScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Picture',
+              "Picture",
+              style: GoogleFonts.bangers(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 60,
+              ),
             ),
             Image.file(File(imagePath)),
 
@@ -200,13 +207,16 @@ class DisplayPictureScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            TestScreen(
-                              imagePath: "test",
-                              results: getResults(imagePath),
-                            )));
+                        builder: (context) => TestScreen(imagePath: "test")));
               },
-              child: Text("Click here for first aid advice"),
+              child: Text(
+                "Click here for first aid advice",
+                style: GoogleFonts.bangers(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 30,
+                ),
+              ),
               color: Colors.lightBlue,
             ),
           ],
@@ -216,24 +226,11 @@ class DisplayPictureScreen extends StatelessWidget {
   }
 }
 
-String getResults(String imagePath) async {
- /* VisionEdgeImageLabeler labeler = VisionEdgeImageLabeler(
-    options: VisionEdgeImageLabelerOptions(
-        confidenceThreshold: 0.5
-    ),
-    dataset: 'mlkit',
-    modelLocation: ModelLocation.Local,
-    handle: 0,
-  );
-  */
-}
-
 // A widget that displays the picture taken by the user.
 class TestScreen extends StatelessWidget {
   final String imagePath;
-  final Future<String> results;
 
-  const TestScreen({Key key, this.imagePath, this.results}) : super(key: key);
+  const TestScreen({Key key, this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -261,18 +258,28 @@ class TestScreen extends StatelessWidget {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(results.toString()),
+            Text(instructions),
             RaisedButton(
               onPressed: () async {
                 final firstcamera = await getCamera();
-                print("Re-routed back to picture screen");
+                //print("Re-routed back to picture screen");
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
                             TakePictureScreen(camera: firstcamera)));
               },
-              child: Text("Click here to retake picture"),
+              child: Text("Retake picture"),
+              color: Colors.lightBlue,
+            ),
+            RaisedButton(
+              onPressed: () async {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyHomePage(title: 'AidFirst')));
+              },
+              child: Text("Return to Home Screen"),
               color: Colors.lightBlue,
             ),
           ],
@@ -282,7 +289,6 @@ class TestScreen extends StatelessWidget {
   }
 }
 
-
 class FirstAidList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -290,7 +296,7 @@ class FirstAidList extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Select the Injury',
       home: Scaffold(
-        appBar: AppBar(title: Text('Selecy the Injury')),
+        appBar: AppBar(title: Text('Select the Injury')),
         body: ListBodyLayout(),
       ),
     );
@@ -317,35 +323,87 @@ Widget _injuryListView(BuildContext context) {
     'Bruise',
     'CPR'
   ];
+
+  Future<String> getFileData(String path) async {
+    return await rootBundle.loadString(path);
+  }
+
+  Future readFileAsString() async {
+    instructions = await getFileData('assets/FirstDegreeBurn.txt');
+  }
+
   return ListView.builder(
-      itemCount: injuries.length,
-      itemBuilder: (context, index) {
-        return CupertinoButton(
-            padding: EdgeInsets.all(7.0),
+    itemCount: injuries.length,
+    itemBuilder: (context, index) {
+      return CupertinoButton(
+        padding: EdgeInsets.all(7.0),
+          child: Container(
+            height: 50,
+            width: 375,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                image: DecorationImage(
+                  image: AssetImage("assets/ant.jpg"),
+                  fit: BoxFit.cover,
+                )),
             child: Container(
-              height: 50,
-              width: 375,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  image: DecorationImage(
-                    image: AssetImage("assets/ant.jpg"),
-                    fit: BoxFit.cover,
-                  )
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                child: Text(
+                  injuries[index],
+                  style: GoogleFonts.bangers(
+                      fontSize: 30,
+                    color: Colors.white
+                  ),
+                )
               ),
-              child: Container(
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      injuries[index],
-                      style: GoogleFonts.bangers(
-                          fontSize: 30,
-                          color: Colors.white
-                      ),
-                    )
-                ),
-              ),
-            )
-        );
-      }
+            ),
+          ),
+          onPressed: () async {
+        readFileAsString();
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => TestScreen2(imagePath: "test"),
+            ));
+      },
+      );
+    }
   );
+}
+class TestScreen2 extends StatelessWidget {
+  final String imagePath;
+
+  const TestScreen2({Key key, this.imagePath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Results')),
+      // The image is stored as a file on the device. Use the `Image.file`
+      // constructor with the given path to display the image.
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Invoke "debug painting" (press "p" in the console, choose the
+          // "Toggle Debug Paint" action from the Flutter Inspector in Android
+          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+          // to see the wireframe for each widget.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[Text(instructions)],
+        ),
+      ),
+    );
+  }
 }

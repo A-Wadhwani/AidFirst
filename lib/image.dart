@@ -206,7 +206,7 @@ Future<void> testPython() async {
 }
 
 Future readFileAsString() async {
-  instructions = await getFileData('assets/WaspBite.txt');
+  instructions = await getFileData('assets/MildCut.txt');
 }
 
 Future<String> getFileData(String path) async {
@@ -332,7 +332,7 @@ class TestScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(
-              image: AssetImage('Datasets/DisplayImages/WaspBite.jpeg'),
+              image: AssetImage('Datasets/DisplayImages/MildCutArt.jpg'),
               fit: BoxFit.cover,
             ),
             Padding(

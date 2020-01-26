@@ -2,12 +2,16 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_livestream_ml_vision/firebase_livestream_ml_vision.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart' as fv;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:path/path.dart' show join;
+import 'package:path/path.dart' show Context, join;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:firebase_livestream_ml_vision/firebase_livestream_ml_vision.dart';
 
 String instructions;
 String filePath;
@@ -35,7 +39,7 @@ Future<void> main() async {
 }
 
 
-Future<CameraDescription> getCamera() async{
+Future<CameraDescription> getCamera() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Obtain a list of the available cameras on the device.
@@ -151,14 +155,14 @@ class DisplayPictureScreen extends StatelessWidget {
   const DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
 
   @override
-
   Future<String> getFileData(String path) async {
     return await rootBundle.loadString(path);
   }
 
   Future readFileAsString() async {
-    instructions =  await getFileData('assets/FirstDegreeBurn.txt');
+    instructions = await getFileData('assets/FirstDegreeBurn.txt');
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Display the Picture')),
@@ -196,7 +200,11 @@ class DisplayPictureScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                    builder: (context) => TestScreen(imagePath: "test")));
+                        builder: (context) =>
+                            TestScreen(
+                              imagePath: "test",
+                              results: getResults(imagePath),
+                            )));
               },
               child: Text("Click here for first aid advice"),
               color: Colors.lightBlue,
@@ -207,14 +215,27 @@ class DisplayPictureScreen extends StatelessWidget {
     );
   }
 }
+
+String getResults(String imagePath) async {
+ /* VisionEdgeImageLabeler labeler = VisionEdgeImageLabeler(
+    options: VisionEdgeImageLabelerOptions(
+        confidenceThreshold: 0.5
+    ),
+    dataset: 'mlkit',
+    modelLocation: ModelLocation.Local,
+    handle: 0,
+  );
+  */
+}
+
 // A widget that displays the picture taken by the user.
 class TestScreen extends StatelessWidget {
   final String imagePath;
+  final Future<String> results;
 
-  const TestScreen({Key key, this.imagePath}) : super(key: key);
+  const TestScreen({Key key, this.imagePath, this.results}) : super(key: key);
+
   @override
-
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Results')),
@@ -240,7 +261,7 @@ class TestScreen extends StatelessWidget {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(instructions),
+            Text(results.toString()),
             RaisedButton(
               onPressed: () async {
                 final firstcamera = await getCamera();
@@ -248,7 +269,8 @@ class TestScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => TakePictureScreen(camera: firstcamera)));
+                        builder: (context) =>
+                            TakePictureScreen(camera: firstcamera)));
               },
               child: Text("Click here to retake picture"),
               color: Colors.lightBlue,
@@ -259,6 +281,7 @@ class TestScreen extends StatelessWidget {
     );
   }
 }
+
 
 class FirstAidList extends StatelessWidget {
   @override
@@ -271,48 +294,58 @@ class FirstAidList extends StatelessWidget {
         body: ListBodyLayout(),
       ),
     );
-    }
   }
+}
+
 class ListBodyLayout extends StatelessWidget {
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return _injuryListView(context);
   }
 }
-Widget _injuryListView(BuildContext context)
-{
-  final injuries = ['Ant Bite', 'Bee Sting', 'Wasp Bite', 'First Degree Burn',
-    'Second Degree Burn', 'Third Degree Burn', 'Mild Cut/Scrape', 'Deep Cut', 'Bruise', 'CPR'];
+
+Widget _injuryListView(BuildContext context) {
+  final injuries = [
+    'Ant Bite',
+    'Bee Sting',
+    'Wasp Bite',
+    'First Degree Burn',
+    'Second Degree Burn',
+    'Third Degree Burn',
+    'Mild Cut/Scrape',
+    'Deep Cut',
+    'Bruise',
+    'CPR'
+  ];
   return ListView.builder(
-    itemCount: injuries.length,
-    itemBuilder: (context, index) {
-      return CupertinoButton(
-        padding: EdgeInsets.all(7.0),
-          child: Container(
-            height: 50,
-            width: 375,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: AssetImage("assets/ant.jpg"),
-                fit: BoxFit.cover,
-              )
-            ),
+      itemCount: injuries.length,
+      itemBuilder: (context, index) {
+        return CupertinoButton(
+            padding: EdgeInsets.all(7.0),
             child: Container(
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                child: Text(
-                  injuries[index],
-                  style: GoogleFonts.bangers(
-                      fontSize: 30,
-                    color: Colors.white
-                  ),
-                )
+              height: 50,
+              width: 375,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  image: DecorationImage(
+                    image: AssetImage("assets/ant.jpg"),
+                    fit: BoxFit.cover,
+                  )
               ),
-            ),
-          )
-      );
-    }
+              child: Container(
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      injuries[index],
+                      style: GoogleFonts.bangers(
+                          fontSize: 30,
+                          color: Colors.white
+                      ),
+                    )
+                ),
+              ),
+            )
+        );
+      }
   );
 }

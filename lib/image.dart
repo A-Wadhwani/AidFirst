@@ -132,7 +132,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // If the picture was taken, display it on a new screen.
             Navigator.push(
               context,
-              MaterialPageRoute(
+              CupertinoPageRoute(
                 builder: (context) => DisplayPictureScreen(imagePath: path),
               ),
             );
@@ -146,19 +146,20 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   }
 }
 
+
+Future readFileAsString() async {
+  instructions = await getFileData('assets/WaspBite.txt');
+}
+
+
+Future<String> getFileData(String path) async {
+  return await rootBundle.loadString(path);
+}
+
 // A widget that displays the picture taken by the user.
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;
-
   const DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
-
-  Future<String> getFileData(String path) async {
-    return await rootBundle.loadString(path);
-  }
-
-  Future readFileAsString() async {
-    instructions = await getFileData('assets/WaspBite.txt');
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,7 +204,7 @@ class DisplayPictureScreen extends StatelessWidget {
                 readFileAsString();
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    CupertinoPageRoute(
                         builder: (context) => TestScreen(imagePath: "test")));
               },
               child: Text(
@@ -231,6 +232,7 @@ class TestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    readFileAsString();
     return Scaffold(
       appBar: AppBar(title: Text('Results')),
       // The image is stored as a file on the device. Use the `Image.file`
@@ -275,7 +277,7 @@ class TestScreen extends StatelessWidget {
                 //print("Re-routed back to picture screen");
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    CupertinoPageRoute(
                         builder: (context) =>
                             TakePictureScreen(camera: firstcamera)));
               },
@@ -292,7 +294,7 @@ class TestScreen extends StatelessWidget {
               onPressed: () async {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    CupertinoPageRoute(
                         builder: (context) => MyHomePage(title: 'AidFirst')));
               },
               child: Text(
@@ -371,7 +373,7 @@ Widget _injuryListView(BuildContext context) {
             child: Container(
               child: Padding(
                 padding: const EdgeInsets.only(
-                  left:20,
+                  left: 15,
                 ),
                 child: Align(
                     alignment: Alignment.centerLeft,

@@ -288,6 +288,7 @@ Widget _injuryListView(BuildContext context)
     itemCount: injuries.length,
     itemBuilder: (context, index) {
       return CupertinoButton(
+        padding: EdgeInsets.all(4.0),
           child: Container(
             height: 50,
             width: 375,

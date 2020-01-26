@@ -61,9 +61,28 @@ flutter:
     - assets/performfirstaid.jpg
     - assets/call911.jpg
     - assets/FirstDegreeBurn.txt
+    - assets/SecondDegreeBurn.txt
+    - assets/ThirdDegreeBurn.txt
+    - assets/CPR.txt
+    - assets/AntBite.txt
+    - assets/BeeSting.txt
+    - assets/WaspBite.txt
+    - assets/DeepCuts.txt
+    - assets/MildCut.txt
+    - assets/Bruise.txt
     - assets/mlkit/dict.txt
     - assets/mlkit/manifest.json
     - assets/mlkit/model.tflite
+    - Datasets/DisplayImages/AntBite.webp
+    - Datasets/DisplayImages/BeeStingArt.jpg
+    - Datasets/DisplayImages/BruiseArt.jpg
+    - Datasets/DisplayImages/CPR.webp
+    - Datasets/DisplayImages/DeepCutArt.jpg
+    - Datasets/DisplayImages/FirstDegreeBurnArt.png
+    - Datasets/DisplayImages/MildCutArt.jpg
+    - Datasets/DisplayImages/SecondDegreeBurnArt.png
+    - Datasets/DisplayImages/ThirdDegreeBurnArt.png
+    - Datasets/DisplayImages/WaspBite.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

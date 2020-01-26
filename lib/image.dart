@@ -156,13 +156,12 @@ class DisplayPictureScreen extends StatelessWidget {
   const DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
 
   @override
-
   Future<String> getFileData(String path) async {
     return await rootBundle.loadString(path);
   }
 
   Future readFileAsString() async {
-    instructions = await getFileData('assets/FirstDegreeBurn.txt');
+    instructions = await getFileData('assets/WaspBite.txt');
   }
 
   Widget build(BuildContext context) {
@@ -191,15 +190,15 @@ class DisplayPictureScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Picture",
-              style: GoogleFonts.bangers(
-                color: Colors.white,
+              "Use this Picture?",
+              style: GoogleFonts.cabin(
+                color: Colors.black,
                 fontWeight: FontWeight.w500,
-                fontSize: 60,
+                fontSize: 40,
               ),
             ),
-            Image.file(File(imagePath)),
-
+            Image.file(File(imagePath),
+            height: 400,),
             RaisedButton(
               onPressed: () {
                 print("You clicked me");
@@ -211,7 +210,7 @@ class DisplayPictureScreen extends StatelessWidget {
               },
               child: Text(
                 "Click here for first aid advice",
-                style: GoogleFonts.bangers(
+                style: GoogleFonts.cabin(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 30,
@@ -258,7 +257,18 @@ class TestScreen extends StatelessWidget {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(instructions),
+            Image(
+              image: AssetImage('Datasets/DisplayImages/WaspBite.jpeg'),
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding:  EdgeInsets.fromLTRB(20, 20, 20, 40),
+              child: Text(instructions,
+                style: GoogleFonts.cabin(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),),
+            ),
             RaisedButton(
               onPressed: () async {
                 final firstcamera = await getCamera();
@@ -269,7 +279,11 @@ class TestScreen extends StatelessWidget {
                         builder: (context) =>
                             TakePictureScreen(camera: firstcamera)));
               },
-              child: Text("Retake picture"),
+              child: Text("Retake picture",
+              style: GoogleFonts.cabin(
+                fontWeight: FontWeight.w400,
+                fontSize: 30,
+              ),),
               color: Colors.lightBlue,
             ),
             RaisedButton(
@@ -279,7 +293,11 @@ class TestScreen extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => MyHomePage(title: 'AidFirst')));
               },
-              child: Text("Return to Home Screen"),
+              child: Text("Home Screen",
+                style: GoogleFonts.cabin(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 32,
+                ),),
               color: Colors.lightBlue,
             ),
           ],
@@ -329,7 +347,7 @@ Widget _injuryListView(BuildContext context) {
   }
 
   Future readFileAsString() async {
-    instructions = await getFileData('assets/FirstDegreeBurn.txt');
+    instructions = await getFileData('assets/WaspBite.txt');
   }
 
   return ListView.builder(
@@ -353,7 +371,7 @@ Widget _injuryListView(BuildContext context) {
                   injuries[index],
                   style: GoogleFonts.bangers(
                       fontSize: 30,
-                    color: Colors.white
+                    color: Colors.black
                   ),
                 )
               ),
@@ -383,6 +401,7 @@ class TestScreen2 extends StatelessWidget {
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
       body: Center(
+
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
@@ -401,7 +420,20 @@ class TestScreen2 extends StatelessWidget {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[Text(instructions)],
+          children: <Widget>[
+            Image(
+              image: AssetImage('Datasets/DisplayImages/WaspBite.jpeg'),
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding:  EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: Text(instructions,
+                style: GoogleFonts.cabin(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),),
+            )
+            ],
         ),
       ),
     );

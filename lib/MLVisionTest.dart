@@ -1,3 +1,5 @@
+//This WHOLE FILE IS DEPRECIATED. DO NOT USE. Instead use MLTestII and detector_painters
+
 import 'package:firebase_livestream_ml_vision/firebase_livestream_ml_vision.dart';
 import 'package:flutter/material.dart';
 

@@ -148,7 +148,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
 
 Future readFileAsString() async {
-  instructions = await getFileData('assets/WaspBite.txt');
+  instructions = await getFileData('assets/MildCut.txt');
 }
 
 
@@ -258,7 +258,7 @@ class TestScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(
-              image: AssetImage('Datasets/DisplayImages/WaspBite.jpeg'),
+              image: AssetImage('Datasets/DisplayImages/MildCutArt.jpg'),
               fit: BoxFit.cover,
             ),
             Padding(

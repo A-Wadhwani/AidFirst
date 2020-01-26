@@ -52,6 +52,9 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'x86', 'armeabi-v7a'
+        }
     }
 
     buildTypes {

@@ -20,6 +20,9 @@ dependencies:
   flutter:
     sdk: flutter
   camera:
+
+  starflut:
+    path: ./starcore_for_flutter/starflut/
   path_provider:
   path:
   image_picker: '0.3.0'
@@ -38,6 +41,7 @@ dev_dependencies:
 
 assets:
   - assets/template.jpg
+  - starfiles/
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

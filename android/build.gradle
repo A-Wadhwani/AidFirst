@@ -10,12 +10,15 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
 allprojects {
     repositories {
         google()
         jcenter()
     }
+}
+
+aaptOptions {
+    noCompress "tflite"
 }
 
 rootProject.buildDir = '../build'

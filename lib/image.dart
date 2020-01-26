@@ -4,15 +4,12 @@ import 'dart:io';
 import 'package:boilermake/main.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_livestream_ml_vision/firebase_livestream_ml_vision.dart';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart' as fv;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' show Context, join;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:firebase_livestream_ml_vision/firebase_livestream_ml_vision.dart';
 
 String instructions;
 String filePath;
@@ -155,7 +152,6 @@ class DisplayPictureScreen extends StatelessWidget {
 
   const DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
 
-  @override
   Future<String> getFileData(String path) async {
     return await rootBundle.loadString(path);
   }
@@ -197,8 +193,10 @@ class DisplayPictureScreen extends StatelessWidget {
                 fontSize: 40,
               ),
             ),
-            Image.file(File(imagePath),
-            height: 400,),
+            Image.file(
+              File(imagePath),
+              height: 400,
+            ),
             RaisedButton(
               onPressed: () {
                 print("You clicked me");
@@ -262,12 +260,14 @@ class TestScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Padding(
-              padding:  EdgeInsets.fromLTRB(20, 20, 20, 40),
-              child: Text(instructions,
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 40),
+              child: Text(
+                instructions,
                 style: GoogleFonts.cabin(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
-                ),),
+                ),
+              ),
             ),
             RaisedButton(
               onPressed: () async {
@@ -279,11 +279,13 @@ class TestScreen extends StatelessWidget {
                         builder: (context) =>
                             TakePictureScreen(camera: firstcamera)));
               },
-              child: Text("Retake picture",
-              style: GoogleFonts.cabin(
-                fontWeight: FontWeight.w400,
-                fontSize: 30,
-              ),),
+              child: Text(
+                "Retake picture",
+                style: GoogleFonts.cabin(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 30,
+                ),
+              ),
               color: Colors.lightBlue,
             ),
             RaisedButton(
@@ -293,11 +295,13 @@ class TestScreen extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => MyHomePage(title: 'AidFirst')));
               },
-              child: Text("Home Screen",
+              child: Text(
+                "Home Screen",
                 style: GoogleFonts.cabin(
                   fontWeight: FontWeight.w400,
                   fontSize: 32,
-                ),),
+                ),
+              ),
               color: Colors.lightBlue,
             ),
           ],
@@ -351,10 +355,10 @@ Widget _injuryListView(BuildContext context) {
   }
 
   return ListView.builder(
-    itemCount: injuries.length,
-    itemBuilder: (context, index) {
-      return CupertinoButton(
-        padding: EdgeInsets.all(7.0),
+      itemCount: injuries.length,
+      itemBuilder: (context, index) {
+        return CupertinoButton(
+          padding: EdgeInsets.all(7.0),
           child: Container(
             height: 50,
             width: 375,
@@ -365,30 +369,34 @@ Widget _injuryListView(BuildContext context) {
                   fit: BoxFit.cover,
                 )),
             child: Container(
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                child: Text(
-                  injuries[index],
-                  style: GoogleFonts.bangers(
-                      fontSize: 30,
-                    color: Colors.black
-                  ),
-                )
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left:20,
+                ),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      injuries[index],
+                      style: GoogleFonts.bangers(
+                        fontSize: 30,
+                        color: Colors.white,
+                      ),
+                    )),
               ),
             ),
           ),
           onPressed: () async {
-        readFileAsString();
-        Navigator.push(
-            context,
-            CupertinoPageRoute(
-              builder: (context) => TestScreen2(imagePath: "test"),
-            ));
-      },
-      );
-    }
-  );
+            readFileAsString();
+            Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => TestScreen2(imagePath: "test"),
+                ));
+          },
+        );
+      });
 }
+
 class TestScreen2 extends StatelessWidget {
   final String imagePath;
 
@@ -401,7 +409,6 @@ class TestScreen2 extends StatelessWidget {
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
       body: Center(
-
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
@@ -426,14 +433,16 @@ class TestScreen2 extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Padding(
-              padding:  EdgeInsets.fromLTRB(20, 20, 20, 20),
-              child: Text(instructions,
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: Text(
+                instructions,
                 style: GoogleFonts.cabin(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
-                ),),
+                ),
+              ),
             )
-            ],
+          ],
         ),
       ),
     );

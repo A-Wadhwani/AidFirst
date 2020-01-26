@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:boilermake/main.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -244,13 +245,23 @@ class TestScreen extends StatelessWidget {
             RaisedButton(
               onPressed: () async {
                 final firstcamera = await getCamera();
-                print("Re-routed back to picture screen");
+                //print("Re-routed back to picture screen");
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => TakePictureScreen(camera: firstcamera)));
               },
-              child: Text("Click here to retake picture"),
+              child: Text("Retake picture"),
+              color: Colors.lightBlue,
+            ),
+            RaisedButton(
+              onPressed: () async {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyHomePage(title: 'AidFirst')));
+              },
+              child: Text("Return to Home Screen"),
               color: Colors.lightBlue,
             ),
           ],

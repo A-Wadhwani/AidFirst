@@ -39,9 +39,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-assets:
-  - assets/template.jpg
-  - starfiles/
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -58,6 +55,8 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   assets:
+    - assets/template.jpg
+    - starfiles/
     - assets/ant.jpg
     - assets/gethelp.jpg
     - assets/performfirstaid.jpg

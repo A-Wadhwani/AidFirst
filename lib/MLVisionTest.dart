@@ -35,7 +35,7 @@ class _MyHomePageState extends State<_MyHomePage> {
       fit: StackFit.expand,
       children: <Widget>[
         FirebaseCameraPreview(_vision),
-        _buildResults(),                //   <---------------------------- NO CLUE WHAT THIS IS?????
+        //_buildResults(),                //   <---------------------------- NO CLUE WHAT THIS IS?????
       ],
     ),
     );

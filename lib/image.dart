@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
+String instructions;
+String filePath;
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -148,6 +151,14 @@ class DisplayPictureScreen extends StatelessWidget {
   const DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
 
   @override
+
+  Future<String> getFileData(String path) async {
+    return await rootBundle.loadString(path);
+  }
+
+  Future readFileAsString() async {
+    instructions =  await getFileData('assets/FirstDegreeBurn.txt');
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Display the Picture')),
@@ -181,6 +192,7 @@ class DisplayPictureScreen extends StatelessWidget {
             RaisedButton(
               onPressed: () {
                 print("You clicked me");
+                readFileAsString();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -200,8 +212,9 @@ class TestScreen extends StatelessWidget {
   final String imagePath;
 
   const TestScreen({Key key, this.imagePath}) : super(key: key);
-
   @override
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Results')),
@@ -227,9 +240,7 @@ class TestScreen extends StatelessWidget {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'This is where the first aid instructions will be printed',
-            ),
+            Text(instructions),
             RaisedButton(
               onPressed: () async {
                 final firstcamera = await getCamera();
@@ -272,7 +283,7 @@ class ListBodyLayout extends StatelessWidget {
 Widget _injuryListView(BuildContext context)
 {
   final injuries = ['Ant Bite', 'Bee Sting', 'Wasp Bite', 'First Degree Burn',
-    'Second Degree Burn', 'Third Degree Burn', 'Mild Cut/Scrape', 'Deep Cut', 'Bruise'];
+    'Second Degree Burn', 'Third Degree Burn', 'Mild Cut/Scrape', 'Deep Cut', 'Bruise', 'CPR'];
   return ListView.builder(
     itemCount: injuries.length,
     itemBuilder: (context, index) {

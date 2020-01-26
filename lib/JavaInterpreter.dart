@@ -13,7 +13,7 @@ String RunJava(List<String> args) {
 
   List<String> arguments = new List<String>();
   arguments.add('-jar');
-  arguments.add('c:\\Users\\KadeB\\source\\flutter\\Projects\\boilermakeII\\BoilerMake\\lib\\JavaFile.jar');
+  arguments.add('lib/JavaFile.jar');
 
   if(args != null) {
     for (int x = 0; x < args.length; x++) {

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,7 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
         alignment: Alignment.topCenter,
         child: Column(
 
-
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
@@ -56,14 +56,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-
             CupertinoButton(
               padding: EdgeInsets.all(4.0),
               child: Container(
                   height: 200,
                   width: 375,
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    image: DecorationImage(
+                      image: AssetImage("assets/gethelp.jpg"),
+                      fit: BoxFit.cover,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Container(
@@ -79,17 +81,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-
                   )),
               onPressed: () async {
                 final firstcamera = await getCamera();
                 Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) =>
-                          TakePictureScreen(
-                            camera: firstcamera,
-                          ),
+                      builder: (context) => TakePictureScreen(
+                        camera: firstcamera,
+                      ),
                     ));
               },
             ),
@@ -99,7 +99,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 150,
                 width: 375,
                 decoration: BoxDecoration(
-                  color: Colors.green,
+                  image: DecorationImage(
+                    image: AssetImage("assets/performfirstaid.jpg"),
+                    fit: BoxFit.cover,
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Container(
@@ -121,7 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       builder: (context) => FirstAidList(),
                     ));
               },
-
             ),
             CupertinoButton(
               padding: EdgeInsets.all(4.0),
@@ -129,7 +131,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 150,
                 width: 375,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  image: DecorationImage(
+                    image: AssetImage("assets/call911.jpg"),
+                    fit: BoxFit.cover,
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Container(

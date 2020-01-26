@@ -272,7 +272,7 @@ class ListBodyLayout extends StatelessWidget {
 Widget _injuryListView(BuildContext context)
 {
   final injuries = ['Ant Bite', 'Bee Sting', 'Wasp Bite', 'First Degree Burn',
-    'Second Degree Burn', 'Third Degree Burn', 'Mild Cut/Scrape', 'Deep Cut', 'Bruise'];
+    'Second Degree Burn', 'Third Degree Burn', 'Mild Cut/Scrape', 'Deep Cut', 'Bruise', 'CPR'];
   return ListView.builder(
     itemCount: injuries.length,
     itemBuilder: (context, index) {

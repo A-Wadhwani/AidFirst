@@ -288,7 +288,7 @@ Widget _injuryListView(BuildContext context)
     itemCount: injuries.length,
     itemBuilder: (context, index) {
       return CupertinoButton(
-        padding: EdgeInsets.all(4.0),
+        padding: EdgeInsets.all(7.0),
           child: Container(
             height: 50,
             width: 375,
@@ -300,13 +300,16 @@ Widget _injuryListView(BuildContext context)
               )
             ),
             child: Container(
+              child: Align(
+                  alignment: Alignment.centerLeft,
                 child: Text(
                   injuries[index],
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.bangers(
                       fontSize: 30,
-                    color: Colors.black
+                    color: Colors.white
                   ),
                 )
+              ),
             ),
           )
       );

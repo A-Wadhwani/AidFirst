@@ -1,0 +1,9 @@
+second_degree
+deep_cuts
+no_damage
+bruises
+wasp_bite
+third_degree
+first_degree
+snake_bites
+bee_bite

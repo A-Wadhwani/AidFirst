@@ -35,8 +35,7 @@ Future<void> main() async {
   );
 }
 
-
-Future<CameraDescription> getCamera() async{
+Future<CameraDescription> getCamera() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Obtain a list of the available cameras on the device.
@@ -47,6 +46,7 @@ Future<CameraDescription> getCamera() async{
 
   return firstCamera;
 }
+
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
@@ -158,8 +158,9 @@ class DisplayPictureScreen extends StatelessWidget {
   }
 
   Future readFileAsString() async {
-    instructions =  await getFileData('assets/FirstDegreeBurn.txt');
+    instructions = await getFileData('assets/FirstDegreeBurn.txt');
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Display the Picture')),
@@ -186,10 +187,14 @@ class DisplayPictureScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Picture',
+              "Picture",
+              style: GoogleFonts.bangers(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 60,
+              ),
             ),
             Image.file(File(imagePath)),
-
             RaisedButton(
               onPressed: () {
                 print("You clicked me");
@@ -197,9 +202,16 @@ class DisplayPictureScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                    builder: (context) => TestScreen(imagePath: "test")));
+                        builder: (context) => TestScreen(imagePath: "test")));
               },
-              child: Text("Click here for first aid advice"),
+              child: Text(
+                "Click here for first aid advice",
+                style: GoogleFonts.bangers(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 30,
+                ),
+              ),
               color: Colors.lightBlue,
             ),
           ],
@@ -208,14 +220,14 @@ class DisplayPictureScreen extends StatelessWidget {
     );
   }
 }
+
 // A widget that displays the picture taken by the user.
 class TestScreen extends StatelessWidget {
   final String imagePath;
 
   const TestScreen({Key key, this.imagePath}) : super(key: key);
+
   @override
-
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Results')),
@@ -249,7 +261,8 @@ class TestScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => TakePictureScreen(camera: firstcamera)));
+                        builder: (context) =>
+                            TakePictureScreen(camera: firstcamera)));
               },
               child: Text("Retake picture"),
               color: Colors.lightBlue,
@@ -278,23 +291,42 @@ class FirstAidList extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Select the Injury',
       home: Scaffold(
-        appBar: AppBar(title: Text('Selecy the Injury')),
+        appBar: AppBar(title: Text('Select the Injury')),
         body: ListBodyLayout(),
       ),
     );
-    }
   }
+}
+
 class ListBodyLayout extends StatelessWidget {
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return _injuryListView(context);
   }
 }
-Widget _injuryListView(BuildContext context)
-{
-  final injuries = ['Ant Bite', 'Bee Sting', 'Wasp Bite', 'First Degree Burn',
-    'Second Degree Burn', 'Third Degree Burn', 'Mild Cut/Scrape', 'Deep Cut', 'Bruise', 'CPR'];
+
+Widget _injuryListView(BuildContext context) {
+  final injuries = [
+    'Ant Bite',
+    'Bee Sting',
+    'Wasp Bite',
+    'First Degree Burn',
+    'Second Degree Burn',
+    'Third Degree Burn',
+    'Mild Cut/Scrape',
+    'Deep Cut',
+    'Bruise',
+    'CPR'
+  ];
+
+  Future<String> getFileData(String path) async {
+    return await rootBundle.loadString(path);
+  }
+
+  Future readFileAsString() async {
+    instructions = await getFileData('assets/FirstDegreeBurn.txt');
+  }
+
   return ListView.builder(
     itemCount: injuries.length,
     itemBuilder: (context, index) {
@@ -305,11 +337,10 @@ Widget _injuryListView(BuildContext context)
             width: 375,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: AssetImage("assets/ant.jpg"),
-                fit: BoxFit.cover,
-              )
-            ),
+                image: DecorationImage(
+                  image: AssetImage("assets/ant.jpg"),
+                  fit: BoxFit.cover,
+                )),
             child: Container(
               child: Align(
                   alignment: Alignment.centerLeft,
@@ -323,7 +354,51 @@ Widget _injuryListView(BuildContext context)
               ),
             ),
           )
+          onPressed: () async {
+        readFileAsString();
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => TestScreen2(imagePath: "test"),
+            ));
+      },
       );
     }
   );
+}
+class TestScreen2 extends StatelessWidget {
+  final String imagePath;
+
+  const TestScreen2({Key key, this.imagePath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Results')),
+      // The image is stored as a file on the device. Use the `Image.file`
+      // constructor with the given path to display the image.
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Invoke "debug painting" (press "p" in the console, choose the
+          // "Toggle Debug Paint" action from the Flutter Inspector in Android
+          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+          // to see the wireframe for each widget.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[Text(instructions)],
+        ),
+      ),
+    );
+  }
 }

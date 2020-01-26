@@ -21,6 +21,8 @@ dependencies:
     sdk: flutter
   camera:
 
+  starflut:
+    path: ./starcore_for_flutter/starflut/
   path_provider:
   path:
   image_picker: '0.3.0'
@@ -54,6 +56,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - assets/template.jpg
+    - starfiles/
     - assets/ant.jpg
     - assets/gethelp.jpg
     - assets/performfirstaid.jpg

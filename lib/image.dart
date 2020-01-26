@@ -352,8 +352,37 @@ Widget _injuryListView(BuildContext context) {
     return await rootBundle.loadString(path);
   }
 
-  Future readFileAsString() async {
-    instructions = await getFileData('assets/WaspBite.txt');
+  Future readFileAsString(int index) async {
+    final injuryFiles = [
+      'AntBite',
+      'BeeSting',
+      'WaspBite',
+      'FirstDegreeBurn',
+      'SecondDegreeBurn',
+      'ThirdDegreeBurn',
+      'MildCut',
+      'DeepCuts',
+      'Bruise',
+      'CPR'
+    ];
+
+    String fileName = injuryFiles[index];
+    instructions = await getFileData('assets/' + fileName + '.txt');
+  }
+  String getDisplayImage(int index) {
+    final injuryImages = [
+      'AntBite.webp',
+      'BeeStingArt.jpg',
+      'WaspBite.jpeg',
+      'FirstDegreeBurnArt.png',
+      'SecondDegreeBurnArt.png',
+      'ThirdDegreeBurnArt.png',
+      'MildCutArt.jpg',
+      'DeepCutArt.jpg',
+      'BruiseArt.jpg',
+      'CPR.webp'
+    ];
+    return injuryImages[index];
   }
 
   return ListView.builder(
@@ -388,11 +417,14 @@ Widget _injuryListView(BuildContext context) {
             ),
           ),
           onPressed: () async {
-            readFileAsString();
+            readFileAsString(index);
+            int c = index;
+            var b = context;
+            String imageFile = getDisplayImage(index);
             Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => TestScreen2(imagePath: "test"),
+                  builder: (context) => TestScreen2(imagePath: imageFile),
                 ));
           },
         );
@@ -431,7 +463,7 @@ class TestScreen2 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(
-              image: AssetImage('Datasets/DisplayImages/WaspBite.jpeg'),
+              image: AssetImage('Datasets/DisplayImages/' + imagePath),//'Datasets/DisplayImages/WaspBite.jpeg'),
               fit: BoxFit.cover,
             ),
             Padding(

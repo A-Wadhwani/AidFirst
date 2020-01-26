@@ -353,7 +353,7 @@ Widget _injuryListView(BuildContext context) {
                 )
               ),
             ),
-          )
+          ),
           onPressed: () async {
         readFileAsString();
         Navigator.push(

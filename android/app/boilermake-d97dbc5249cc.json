@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "boilermake",
+  "private_key_id": "d97dbc5249cc9c678366e5519f9b669df1a6cb08",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCMlFaa/O35esHX\nC+B5IqJvIMZlxhWNgwzQgcc9/a+gq3+XVLjRGJpPq2h3NqT1efOYqvQtLRYVQDDp\nHEjaQ4uUVIpo3CrAK22W+GMqQFxfb3nZa5Cd2frgg6dpU57Bl1zu9aYhPoHWioOk\nSZZNBawGPoKWwkBub1wPaQs1On2iGeNMnY4EE0brfOdq35c25LikP/VH77gRobQR\n0yZG5YxNNuDuIlY9gXp21MrW0cV4Q4TKrxG/iNhgAVhpsBcVBxbc2jWmP/87SgF1\n2nUFLaS6GUoAH4fWbRDMzJwjminlpRy0TBo4llDYOXxjQU9SnehHsuQMKcq16j4L\nLEADHYU/AgMBAAECggEADCElx9cDAX+iB1gIVOtexeU3Y8NPoMIp8jkAY/eQ68q1\nsOz9IALWGFcF0HjFNZkBd669xW1vy62aNW2HVlh1oVAaESojVilpGe7x6iIGK7CG\npvKCVocJqngxkwOasxbITKX4C5jvwv8jP02fdk3YUJbxgD3f0/zac0nw+aAZBEoZ\ndQkK2663NsShI4hoNQd5PEGfrNA/IJuJa8S8ummOb+rfi7lQGp3ThUfGjy0iEl7s\nbFa6BSzfDgFzbJBUqMdGLe32/gqqpHoeMcjTPIY8CbupdFeZK0Nay1VwQscK70vB\nUacgIjCnlo9DTWrtW2uEqTBKLH5R4p4SgrYsOv08QQKBgQDCKB8fqOpTrLGrTZXy\nqnOhNIItINieIc+76oc1l/tGMCBkQOBreXaAxQMDcUdzq9pP4VyxDEBaiIEYhY6l\n219INR44tDwJicj4kbvmz+8VMU0wvl2HnIZKhxThj8h3gzWb+v7cl7aH3cQ46wMK\n3K7LM53N1ft0RdiIBaNhl2eABwKBgQC5W26Pdm7mj+3TvT2FhG2MX0DkxnPSXioB\n9roze76Xx1AZBTphJB0rLCWhalKrKIpXHD8TUbnnSWIfv0KGuYHyRnuZaAK4tHze\nlLnS1xJZc1JSmgV6ksrqERIM5ybaHkjXtCaWe9X8cXxcypkrXTS1ZyjLQ/tYBm+G\nTJyI5NqTCQKBgDUYR7qetMYBGe0goHrmBgz1kQvKSbKkyGw5LJSJZVvCWXlRDI4X\nf0KjnblZRxLo0iC6HmEEWqznW3ZbP7E3lozmiccz8p8hIOZo5BuwjU8cVmGYDXfC\nZC8JVbqBWW7lYMmxD/U/P9lT2g8+pWxZASvsh6D8fXFEkHxSHmXXw6QNAoGABztf\nA+/uAcbp05IVnWj+UTTCNmrbyABuiScUOsAAPrHDGUbP8UxUawPM8BBS62SoiR+M\nAnf01eZSEsUGlnUUcdx4JBMf0A8StCh/W4+SorTSKHDj99VUX2+NEb3PEUGPPANG\nYiawwam33XL2KO/5B37f45ZibxvJLCc/EERFlukCgYEAkenfEcw2xiQb8eRRzyeG\nkqYDzL3A8X3IuMVa8V4PbiBzhbsCf0/9c6JCI/otVpcO6ztOKmm1G4eUp319Icub\nRQQPs8LBVNyVJIaCQS6SbXZgw4TZqX+mqt62V8l72d2PgJs8V5bvLNGcFgPd9+fI\nYj9q3b1wrSNPBMds+vCFeoY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "boilermaker@boilermake.iam.gserviceaccount.com",
+  "client_id": "111106243300306073979",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/boilermaker%40boilermake.iam.gserviceaccount.com"
+}
